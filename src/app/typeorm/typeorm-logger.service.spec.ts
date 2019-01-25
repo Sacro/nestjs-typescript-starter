@@ -29,7 +29,9 @@ describe('TypeormLoggerService', () => {
     });
 
     it('should call the logger', () => {
-      const log = jest.spyOn(Logger, 'log');
+      const log = jest.spyOn(Logger, 'log').mockImplementation(() => {
+        return;
+      });
 
       service.logQuery('query');
       service.logQuery('query', ['params']);
@@ -44,7 +46,9 @@ describe('TypeormLoggerService', () => {
     });
 
     it('should call the logger', () => {
-      const error = jest.spyOn(Logger, 'error');
+      const error = jest.spyOn(Logger, 'error').mockImplementation(() => {
+        return;
+      });
 
       service.logQueryError('error', 'query');
       service.logQueryError('error', 'query', ['params']);
@@ -59,7 +63,9 @@ describe('TypeormLoggerService', () => {
     });
 
     it('should call the logger', () => {
-      const log = jest.spyOn(Logger, 'warn');
+      const log = jest.spyOn(Logger, 'warn').mockImplementation(() => {
+        return;
+      });
 
       service.logQuerySlow(1, 'query');
       service.logQuerySlow(1, 'query', ['params']);
@@ -86,7 +92,9 @@ describe('TypeormLoggerService', () => {
     });
 
     it('should call the logger', () => {
-      const log = jest.spyOn(Logger, 'log');
+      const log = jest.spyOn(Logger, 'log').mockImplementation(() => {
+        return;
+      });
 
       service.logMigration('message');
 
@@ -100,8 +108,13 @@ describe('TypeormLoggerService', () => {
     });
 
     it('should call the logger', () => {
-      const log = jest.spyOn(Logger, 'log');
-      const warn = jest.spyOn(Logger, 'warn');
+      const log = jest.spyOn(Logger, 'log').mockImplementation(() => {
+        return;
+      });
+
+      const warn = jest.spyOn(Logger, 'warn').mockImplementation(() => {
+        return;
+      });
 
       service.log('log', 'log message');
       service.log('info', 'info message');
