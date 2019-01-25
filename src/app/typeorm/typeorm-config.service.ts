@@ -10,8 +10,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      type: 'sqlite',
-      database: 'sqlite.db',
+      ...this.config.postgres,
       entities: this.config.isProdEnvironment
         ? ['dist/**/**.entity{.ts,.js}']
         : ['src/**/**.entity{.ts,.js}'],

@@ -1,6 +1,8 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as Joi from 'joi';
+import username from 'username';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export interface EnvConfig {
   [key: string]: string;
@@ -38,6 +40,26 @@ export class ConfigService {
       PORT: Joi.number()
         .default(3000)
         .optional(),
+
+      POSTGRES_USER: Joi.string()
+        .default(username)
+        .optional(),
+
+      POSTGRES_PASSWORD: Joi.string()
+        .default(username)
+        .optional(),
+
+      POSTGRES_HOST: Joi.string()
+        .default('localhost')
+        .optional(),
+
+      POSTGRES_PORT: Joi.number()
+        .default(5432)
+        .optional(),
+
+      POSTGRES_DATABASE: Joi.string()
+        .default(username)
+        .optional(),
     }).options({
       abortEarly: false,
       presence: envConfig.NODE_ENV === 'test' ? 'optional' : 'required',
@@ -70,5 +92,16 @@ export class ConfigService {
 
   get port() {
     return this.envConfig.PORT;
+  }
+
+  /* Custom configuration follows */
+  get postgres(): PostgresConnectionOptions {
+    return {
+      type: 'postgres',
+      username: this.envConfig.POSTGRES_USER,
+      password: this.envConfig.POSTGRES_PASSWORD,
+      host: this.envConfig.POSTGRES_HOST,
+      database: this.envConfig.POSTGRES_DATABASE,
+    };
   }
 }
