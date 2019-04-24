@@ -2849,7 +2849,7 @@ jest-environment-node@^24.7.1:
     jest-mock "^24.7.0"
     jest-util "^24.7.1"
 
-jest-extended@0.11.1:
+jest-extended@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/jest-extended/-/jest-extended-0.11.1.tgz#aad7cf5b3035ee0d058fefcef44c516bbfad66d6"
   integrity sha512-4klauyMgaoqMG27yu2HMGoQLVJ5ntJuJRgUKA/HS0oiGNBuSOkXNB7dxDtL83qYaBDMLVaOjy23QPLXFASUbVg==
