@@ -1,8 +1,12 @@
 import { Logger } from '@nestjs/common';
-import { Logger as TypeormLogger, QueryRunner } from 'typeorm';
+import { Logger as TypeormLogger } from 'typeorm';
 
 export class TypeormLoggerService implements TypeormLogger {
-  logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
+  public logQuery(
+    query: string,
+    parameters?: unknown[],
+    // _queryRunner?: QueryRunner,
+  ): void {
     const sql =
       query +
       (parameters && parameters.length
@@ -11,12 +15,12 @@ export class TypeormLoggerService implements TypeormLogger {
     Logger.log(`query: ${sql}`, 'TypeORM');
   }
 
-  logQueryError(
+  public logQueryError(
     error: string,
     query: string,
-    parameters?: any[],
-    queryRunner?: QueryRunner,
-  ) {
+    parameters?: unknown[],
+    // _queryRunner?: QueryRunner,
+  ): void {
     const sql =
       query +
       (parameters && parameters.length
@@ -25,12 +29,12 @@ export class TypeormLoggerService implements TypeormLogger {
     Logger.error(`query failed: ${sql}`, error, 'TypeORM');
   }
 
-  logQuerySlow(
+  public logQuerySlow(
     time: number,
     query: string,
-    parameters?: any[],
-    queryRunner?: QueryRunner,
-  ) {
+    parameters?: unknown[],
+    // _queryRunner?: QueryRunner,
+  ): void {
     const sql =
       query +
       (parameters && parameters.length
@@ -40,15 +44,25 @@ export class TypeormLoggerService implements TypeormLogger {
     Logger.warn(`execution time: ${time}`);
   }
 
-  logSchemaBuild(message: string, queryRunner?: QueryRunner) {
-    throw new Error('Method not implemented.');
+  public logSchemaBuild(
+    message: string,
+    // _queryRunner?: QueryRunner
+  ): void {
+    throw new Error(`Method not implemented. Message ${message}`);
   }
 
-  logMigration(message: string, queryRunner?: QueryRunner) {
+  public logMigration(
+    message: string,
+    // _queryRunner?: QueryRunner
+  ): void {
     Logger.log(message, 'TypeORM');
   }
 
-  log(level: 'log' | 'info' | 'warn', message: any, queryRunner?: QueryRunner) {
+  public log(
+    level: 'log' | 'info' | 'warn',
+    message: unknown,
+    // _queryRunner?: QueryRunner,
+  ): void {
     switch (level) {
       case 'log':
         Logger.log(message);
@@ -66,7 +80,7 @@ export class TypeormLoggerService implements TypeormLogger {
    * Converts parameters to a string.
    * Sometimes parameters can have circular objects and therefor we are handle this case too.
    */
-  protected stringifyParams(parameters: any[]) {
+  protected stringifyParams(parameters: unknown[]): string | unknown[] {
     try {
       return JSON.stringify(parameters);
     } catch (error) {

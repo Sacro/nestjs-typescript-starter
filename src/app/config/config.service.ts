@@ -11,7 +11,7 @@ export interface EnvConfig {
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
-  constructor(filePath: string) {
+  public constructor(filePath: string) {
     const config: EnvConfig = this.readEnvFromFile(filePath);
     this.envConfig = this.validateInput(config);
   }
@@ -78,24 +78,24 @@ export class ConfigService {
     return validatedEnvConfig;
   }
 
-  get isDevEnvironment(): boolean {
+  public get isDevEnvironment(): boolean {
     return Boolean(this.envConfig.NODE_ENV === 'development');
   }
 
-  get isProdEnvironment(): boolean {
+  public get isProdEnvironment(): boolean {
     return Boolean(this.envConfig.NODE_ENV === 'production');
   }
 
-  get isTestEnvironment(): boolean {
+  public get isTestEnvironment(): boolean {
     return Boolean(this.envConfig.NODE_ENV === 'test');
   }
 
-  get port() {
+  public get port(): string {
     return this.envConfig.PORT;
   }
 
   /* Custom configuration follows */
-  get postgres(): PostgresConnectionOptions {
+  public get postgres(): PostgresConnectionOptions {
     return {
       type: 'postgres',
       username: this.envConfig.POSTGRES_USER,

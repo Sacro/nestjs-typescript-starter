@@ -6,9 +6,9 @@ import { TypeormLoggerService } from './typeorm-logger.service';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
-  constructor(readonly config: ConfigService) {}
+  public constructor(private readonly config: ConfigService) {}
 
-  createTypeOrmOptions(): TypeOrmModuleOptions {
+  public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       ...this.config.postgres,
       entities: this.config.isProdEnvironment
