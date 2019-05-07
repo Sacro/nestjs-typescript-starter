@@ -1,6 +1,6 @@
 import 'jest-extended';
 
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 
 import { ConfigModule } from './config.module';
 import { ConfigService } from './config.service';
