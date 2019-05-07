@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as Joi from 'joi';
-import username from 'username';
+import { sync as username} from 'username';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export interface EnvConfig {
@@ -42,11 +42,11 @@ export class ConfigService {
         .optional(),
 
       POSTGRES_USER: Joi.string()
-        .default(username)
+        .default(username())
         .optional(),
 
       POSTGRES_PASSWORD: Joi.string()
-        .default(username)
+        .default(username())
         .optional(),
 
       POSTGRES_HOST: Joi.string()
@@ -58,7 +58,7 @@ export class ConfigService {
         .optional(),
 
       POSTGRES_DATABASE: Joi.string()
-        .default(username)
+        .default(username())
         .optional(),
     }).options({
       abortEarly: false,
