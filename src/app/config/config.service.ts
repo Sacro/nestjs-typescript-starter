@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as Joi from 'joi';
-import { sync as username} from 'username';
+import { sync as username } from 'username';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export interface EnvConfig {
