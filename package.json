@@ -87,7 +87,7 @@
     }
   },
   "lint-staged": {
-    "*.(j|t)s(x)": [
+    "**/*.(j|t)s(x)": [
       "eslint --fix",
       "git add"
     ]
