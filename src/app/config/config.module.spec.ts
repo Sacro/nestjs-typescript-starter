@@ -6,14 +6,14 @@ import { ConfigModule } from './config.module';
 import { ConfigService } from './config.service';
 
 describe('ConfigModule', () => {
-  let service: ConfigService;
+  let configService: ConfigService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [ConfigModule],
     }).compile();
 
-    service = module.get<ConfigService>(ConfigService);
+    configService = module.get<ConfigService>(ConfigService);
   });
 
   it('should be defined', () => {
@@ -21,6 +21,6 @@ describe('ConfigModule', () => {
   });
 
   it('should expose ConfigService', () => {
-    expect(service).toBeDefined();
+    expect(configService).toBeDefined();
   });
 });
