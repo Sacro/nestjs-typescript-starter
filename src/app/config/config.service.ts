@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 import { sync as username } from 'username';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
