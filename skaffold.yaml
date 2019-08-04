@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1beta13
+kind: Config
+build:
+  artifacts:
+  - image: nestjs
+    context: .
+    docker:
+      target: prebuild
+    sync:
+      manual:
+      # Sync all the typescript files that are in the src folder
+      # with the container src folder
+      - src: 'src/**/*.ts'
+        dest: .
