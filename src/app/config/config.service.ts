@@ -37,6 +37,7 @@ export class ConfigService {
         .valid(['development', 'production', 'test', 'provision'])
         .default('production')
         .optional(),
+
       PORT: Joi.number()
         .default(3000)
         .optional(),
@@ -57,7 +58,7 @@ export class ConfigService {
         .default(5432)
         .optional(),
 
-      POSTGRES_DATABASE: Joi.string()
+      POSTGRES_DB: Joi.string()
         .default(username())
         .optional(),
     }).options({
@@ -101,7 +102,7 @@ export class ConfigService {
       username: this.envConfig.POSTGRES_USER,
       password: this.envConfig.POSTGRES_PASSWORD,
       host: this.envConfig.POSTGRES_HOST,
-      database: this.envConfig.POSTGRES_DATABASE,
+      database: this.envConfig.POSTGRES_DB,
     };
   }
 }

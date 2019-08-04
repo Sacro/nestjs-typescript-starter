@@ -27,5 +27,14 @@ spec:
           image: nestjs
           command: ['npm']
           args: ['run', 'start:dev']
+          env:
+            - name: POSTGRES_HOST
+              value: nestjs-postgres
+            - name: POSTGRES_DB
+              value: nestjs-database
+            - name: POSTGRES_USER
+              value: nestjs-user
+            - name: POSTGRES_PASSWORD
+              value: nestjs-password
           ports:
             - containerPort: 3000

@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nestjs-postgres
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+  selector:
+    app: nestjs-postgres
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nestjs-postgres
+  template:
+    metadata:
+      labels:
+        app: nestjs-postgres
+    spec:
+      containers:
+      - name: nestjs-postgres
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: nestjs-database
+        - name: POSTGRES_USER
+          value: nestjs-user
+        - name: POSTGRES_PASSWORD
+          value: nestjs-password
