@@ -1,0 +1,14 @@
+# This Service manifest defines:
+# - a load balancer for pods matching label "app: nestjs-app"
+# - exposing the application to the public Internet (type:LoadBalancer)
+# Syntax reference https://kubernetes.io/docs/concepts/configuration/overview/
+apiVersion: v1
+kind: Service
+metadata:
+  name: nestjs-app-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: nestjs-app
+  ports:
+  - port: 3000
