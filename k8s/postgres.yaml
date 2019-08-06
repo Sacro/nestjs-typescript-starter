@@ -5,8 +5,8 @@ metadata:
   name: nestjs-postgres
 spec:
   ports:
-  - port: 5432
-    protocol: TCP
+    - port: 5432
+      protocol: TCP
   selector:
     app: nestjs-postgres
 ---
@@ -25,14 +25,14 @@ spec:
         app: nestjs-postgres
     spec:
       containers:
-      - name: nestjs-postgres
-        image: postgres
-        ports:
+        - name: nestjs-postgres
+          image: postgres
+          ports:
         - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          value: nestjs-database
-        - name: POSTGRES_USER
-          value: nestjs-user
-        - name: POSTGRES_PASSWORD
-          value: nestjs-password
+          env:
+            - name: POSTGRES_DB
+              value: nestjs-database
+            - name: POSTGRES_USER
+              value: nestjs-user
+            - name: POSTGRES_PASSWORD
+              value: nestjs-password

@@ -4,7 +4,7 @@ apiVersion: skaffold/v1beta13
 kind: Config
 build:
   artifacts:
-    - image: nestjs-app
+    - image: localhost:32000/nestjs
       context: .
       docker:
         target: prebuild

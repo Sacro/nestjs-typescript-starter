@@ -1,37 +1,34 @@
-# This Deployment manifest defines:
-# - single-replica deployment of the container image, with label "app: nestjs-app"
-# - Pod exposes port 3000
-# - specify PORT environment variable to the container process
-# Syntax reference https://kubernetes.io/docs/concepts/configuration/overview/
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nestjs-app
+  name: nestjs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nestjs-app
+      app: nestjs
   template:
     metadata:
       labels:
-        app: nestjs-app
+        app: nestjs
     spec:
       containers:
-        - name: server
-          image: nestjs-app
+        - name: nestjs
+          image: localhost:32000/nestjs
           command: ['npm']
           args: ['run', 'start:dev']
           env:
-          - name: PORT
-            value: "3000"
-          - name: POSTGRES_HOST
-            value: nestjs-postgres
-          - name: POSTGRES_DB
-            value: nestjs-database
-          - name: POSTGRES_USER
-            value: nestjs-user
-          - name: POSTGRES_PASSWORD
-            value: nestjs-password
+            - name: PORT
+              value: "3000"
+            - name: POSTGRES_HOST
+              value: nestjs-postgres
+            - name: POSTGRES_DB
+              value: nestjs-database
+            - name: POSTGRES_USER
+              value: nestjs-user
+            - name: POSTGRES_PASSWORD
+              value: nestjs-password
           ports:
-           - containerPort: 3000
+            - containerPort: 3000
