@@ -1,16 +1,16 @@
+---
+
 apiVersion: skaffold/v1beta13
 kind: Config
 build:
-  tagPolicy:
-    sha256: {}
   artifacts:
-  - image: nestjs-app
-    context: .
-    docker:
-      target: prebuild
-    sync:
-      manual:
-      # Sync all the typescript files that are in the src folder
-      # with the container src folder
-      - src: 'src/**/*.ts'
-        dest: .
+    - image: nestjs-app
+      context: .
+      docker:
+        target: prebuild
+      sync:
+        manual:
+          # Sync all the typescript files that are in the src folder
+          # with the container src folder
+          - src: 'src/**/*.ts'
+            dest: .
