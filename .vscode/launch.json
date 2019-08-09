@@ -7,7 +7,7 @@
       "request": "attach",
       "debugPort": 9229,
       "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/app",
+      "remoteRoot": "/home/node/app",
       "name": "Attach App on Kubernetes Cluster: NodeJS",
       "podSelector": {
         "app": "nestjs-app"
@@ -18,7 +18,7 @@
       "language": "Node",
       "request": "launch",
       "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/app",
+      "remoteRoot": "/home/node/app",
       "protocol": "auto",
       "name": "Launch App on Kubernetes Cluster: NodeJS",
       "podSelector": {

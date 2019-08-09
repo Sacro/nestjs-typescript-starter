@@ -1,5 +1,8 @@
 {
   "cloudcode.profile-cluster-map": {
-    "[default]": "minikube"
+    "[default]": "microk8s"
+  },
+  "cloudcode.profile-registry-map": {
+    "[default]": "localhost:32000/nestjs"
   }
 }

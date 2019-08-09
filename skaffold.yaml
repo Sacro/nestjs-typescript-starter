@@ -13,15 +13,4 @@ build:
           # Sync all the typescript files that are in the src folder
           # with the container src folder
           - src: 'src/**/*.ts'
-            dest: .
-
-deploy:
-  helm:
-    releases:
-      - name: nestjs
-        chartPath: charts/nestjs
-        setValueTemplates:
-          image.repository: localhost:32000/nestjs
-          image.tag: latest
-          image.pullPolicy: Always
-          service.port: "3000"
+            dest: '.'

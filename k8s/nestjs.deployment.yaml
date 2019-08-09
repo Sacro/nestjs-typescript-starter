@@ -3,32 +3,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nestjs
+  name: nestjs-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nestjs
+      app: nestjs-app
   template:
     metadata:
       labels:
-        app: nestjs
+        app: nestjs-app
     spec:
       containers:
-        - name: nestjs
+        - name: nestjs-app
           image: localhost:32000/nestjs
-          command: ['npm']
-          args: ['run', 'start:dev']
-          env:
-            - name: PORT
-              value: "3000"
-            - name: POSTGRES_HOST
-              value: nestjs-postgres
-            - name: POSTGRES_DB
-              value: nestjs-database
-            - name: POSTGRES_USER
-              value: nestjs-user
-            - name: POSTGRES_PASSWORD
-              value: nestjs-password
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
