@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TerminusModule } from '@nestjs/terminus';
+// import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ConfigModule } from './config/config.module';
-import { TypeOrmConfigService } from './typeorm/typeorm-config.service';
+import { TerminusOptionsService } from './terminus/terminus-options.service';
+// import { TypeOrmConfigService } from './typeorm/typeorm-config.service';
 
 @Module({
   imports: [
     ConfigModule,
-    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    TerminusModule.forRootAsync({ useClass: TerminusOptionsService }),
+    // TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
   ],
   controllers: [],
   providers: [],
