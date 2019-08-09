@@ -5,6 +5,8 @@ WORKDIR /home/node/app
 COPY --chown=node package.json yarn.lock ./
 RUN yarn install
 COPY --chown=node . ./
+EXPOSE 3000
+CMD ["yarn", "run", "start:dev"]
 
 FROM prebuild as build
 USER node
