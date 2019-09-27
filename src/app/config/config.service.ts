@@ -34,7 +34,7 @@ export class ConfigService {
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        .valid(['development', 'production', 'test', 'provision'])
+        .valid('development', 'production', 'test', 'provision')
         .default('production')
         .optional(),
 
@@ -67,9 +67,8 @@ export class ConfigService {
       stripUnknown: true,
     });
 
-    const { error, value: validatedEnvConfig } = Joi.validate(
+    const { error, value: validatedEnvConfig } = envVarsSchema.validate(
       envConfig,
-      envVarsSchema,
     );
 
     if (error) {
