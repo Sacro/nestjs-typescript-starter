@@ -7,8 +7,6 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TerminusOptionsService implements TerminusOptionsFactory {
-  public constructor() {}
-
   public createTerminusOptions(): TerminusModuleOptions {
     const healthEndpoint: TerminusEndpoint = {
       url: '/health',

@@ -20,27 +20,26 @@ describe('ConfigService', () => {
   });
 
   it('should fail with an invalid config', async () => {
-    const invalidEnv: EnvConfig = { NODE_ENV: 'invalid' };
-    expect(() => (service as any).validateInput(invalidEnv)).toThrowWithMessage(
-      Error,
-      /^Config validation error:/,
-    );
+    const invalidEnvironment: EnvConfig = { NODE_ENV: 'invalid' };
+    expect(() =>
+      (service as any).validateInput(invalidEnvironment),
+    ).toThrowWithMessage(Error, /^Config validation error:/);
   });
 
   it('should be able to read a .env file', () => {
     const filePath = 'sample.env';
     if (fs.existsSync(filePath)) {
-      expect((service as any).readEnvFromFile(filePath)).toBeObject();
+      expect((service as any).readEnvironmentFromFile(filePath)).toBeObject();
     }
   });
 
   describe('should expose configuration properties', () => {
     it('should check for dev environment', () => {
-      expect(service.isDevEnvironment).toBeFalse();
+      expect(service.isDevelopmentEnvironment).toBeFalse();
     });
 
     it('should check for production environment', () => {
-      expect(service.isProdEnvironment).toBeFalse();
+      expect(service.isProductionEnvironment).toBeFalse();
     });
 
     it('should check for test environment', () => {

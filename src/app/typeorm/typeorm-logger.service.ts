@@ -9,8 +9,8 @@ export class TypeormLoggerService implements TypeormLogger {
   ): void {
     const sql =
       query +
-      (parameters && parameters.length
-        ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+      (parameters && parameters.length > 0
+        ? ' -- PARAMETERS: ' + this.stringifyParameters(parameters)
         : '');
     Logger.log(`query: ${sql}`, 'TypeORM');
   }
@@ -23,8 +23,8 @@ export class TypeormLoggerService implements TypeormLogger {
   ): void {
     const sql =
       query +
-      (parameters && parameters.length
-        ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+      (parameters && parameters.length > 0
+        ? ' -- PARAMETERS: ' + this.stringifyParameters(parameters)
         : '');
     Logger.error(`query failed: ${sql}`, error, 'TypeORM');
   }
@@ -37,8 +37,8 @@ export class TypeormLoggerService implements TypeormLogger {
   ): void {
     const sql =
       query +
-      (parameters && parameters.length
-        ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+      (parameters && parameters.length > 0
+        ? ' -- PARAMETERS: ' + this.stringifyParameters(parameters)
         : '');
     Logger.warn(`query is slow: ${sql}`, 'TypeORM');
     Logger.warn(`execution time: ${time}`);
@@ -80,7 +80,7 @@ export class TypeormLoggerService implements TypeormLogger {
    * Converts parameters to a string.
    * Sometimes parameters can have circular objects and therefor we are handle this case too.
    */
-  protected stringifyParams(parameters: unknown[]): string | unknown[] {
+  protected stringifyParameters(parameters: unknown[]): string | unknown[] {
     try {
       return JSON.stringify(parameters);
     } catch (error) {

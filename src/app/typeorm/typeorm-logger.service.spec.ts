@@ -36,7 +36,7 @@ describe('TypeormLoggerService', () => {
       service.logQuery('query');
       service.logQuery('query', ['params']);
 
-      expect(log).toBeCalledTimes(2);
+      expect(log).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -53,7 +53,7 @@ describe('TypeormLoggerService', () => {
       service.logQueryError('error', 'query');
       service.logQueryError('error', 'query', ['params']);
 
-      expect(error).toBeCalledTimes(2);
+      expect(error).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -70,7 +70,7 @@ describe('TypeormLoggerService', () => {
       service.logQuerySlow(1, 'query');
       service.logQuerySlow(1, 'query', ['params']);
 
-      expect(log).toBeCalledTimes(4); // Each logs two lines
+      expect(log).toHaveBeenCalledTimes(4); // Each logs two lines
     });
   });
 
@@ -82,7 +82,7 @@ describe('TypeormLoggerService', () => {
     it('should throw an Error', () => {
       expect(() => {
         service.logSchemaBuild('message');
-      }).toThrowError();
+      }).toThrow();
     });
   });
 
@@ -98,7 +98,7 @@ describe('TypeormLoggerService', () => {
 
       service.logMigration('message');
 
-      expect(log).toBeCalledTimes(1);
+      expect(log).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -120,23 +120,23 @@ describe('TypeormLoggerService', () => {
       service.log('info', 'info message');
       service.log('warn', 'warning message');
 
-      expect(log).toBeCalledTimes(2);
-      expect(warn).toBeCalledTimes(1);
+      expect(log).toHaveBeenCalledTimes(2);
+      expect(warn).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('stringifyParams', () => {
     it('should be defined', () => {
-      expect((service as any).stringifyParams).toBeDefined();
+      expect((service as any).stringifyParameters).toBeDefined();
     });
 
     it('should handle circular JSON', () => {
-      const object = { arr: [], obj: {} };
-      object.arr = [object, object];
-      object.arr.push(object.arr);
-      object.obj = object;
+      const object = { array: [], object: {} };
+      object.array = [object, object];
+      object.array.push(object.array);
+      object.object = object;
 
-      expect((service as any).stringifyParams(object)).toEqual(object);
+      expect((service as any).stringifyParameters(object)).toEqual(object);
     });
   });
 });

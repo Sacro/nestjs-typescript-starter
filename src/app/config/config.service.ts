@@ -9,14 +9,14 @@ export interface EnvConfig {
 }
 
 export class ConfigService {
-  private readonly envConfig: EnvConfig;
+  private readonly environmentConfig: EnvConfig;
 
   public constructor(filePath: string) {
-    const config: EnvConfig = this.readEnvFromFile(filePath);
-    this.envConfig = this.validateInput(config);
+    const config: EnvConfig = this.readEnvironmentFromFile(filePath);
+    this.environmentConfig = this.validateInput(config);
   }
 
-  private readEnvFromFile(filePath: string): EnvConfig {
+  private readEnvironmentFromFile(filePath: string): EnvConfig {
     if (fs.existsSync(filePath)) {
       return Object.assign(
         dotenv.parse(fs.readFileSync(filePath)),
@@ -31,8 +31,8 @@ export class ConfigService {
    * Ensures all needed variables are set, and returns the validated JavaScript object
    * including the applied default values.
    */
-  private validateInput(envConfig: EnvConfig): EnvConfig {
-    const envVarsSchema: Joi.ObjectSchema = Joi.object({
+  private validateInput(environmentConfig): EnvConfig {
+    const environmentVarsSchema = Joi.object({
       NODE_ENV: Joi.string()
         .valid('development', 'production', 'test', 'provision')
         .default('production')
@@ -63,45 +63,46 @@ export class ConfigService {
         .optional(),
     }).options({
       abortEarly: false,
-      presence: envConfig.NODE_ENV === 'test' ? 'optional' : 'required',
+      presence: environmentConfig.NODE_ENV === 'test' ? 'optional' : 'required',
       stripUnknown: true,
     });
 
-    const { error, value: validatedEnvConfig } = envVarsSchema.validate(
-      envConfig,
-    );
+    const {
+      error,
+      value: validatedEnvironmentConfig,
+    } = environmentVarsSchema.validate(environmentConfig);
 
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);
     }
 
-    return validatedEnvConfig;
+    return validatedEnvironmentConfig;
   }
 
-  public get isDevEnvironment(): boolean {
-    return Boolean(this.envConfig.NODE_ENV === 'development');
+  public get isDevelopmentEnvironment(): boolean {
+    return Boolean(this.environmentConfig.NODE_ENV === 'development');
   }
 
-  public get isProdEnvironment(): boolean {
-    return Boolean(this.envConfig.NODE_ENV === 'production');
+  public get isProductionEnvironment(): boolean {
+    return Boolean(this.environmentConfig.NODE_ENV === 'production');
   }
 
   public get isTestEnvironment(): boolean {
-    return Boolean(this.envConfig.NODE_ENV === 'test');
+    return Boolean(this.environmentConfig.NODE_ENV === 'test');
   }
 
   public get port(): string {
-    return this.envConfig.PORT;
+    return this.environmentConfig.PORT;
   }
 
   /* Custom configuration follows */
   public get postgres(): PostgresConnectionOptions {
     return {
       type: 'postgres',
-      username: this.envConfig.POSTGRES_USER,
-      password: this.envConfig.POSTGRES_PASSWORD,
-      host: this.envConfig.POSTGRES_HOST,
-      database: this.envConfig.POSTGRES_DB,
+      username: this.environmentConfig.POSTGRES_USER,
+      password: this.environmentConfig.POSTGRES_PASSWORD,
+      host: this.environmentConfig.POSTGRES_HOST,
+      database: this.environmentConfig.POSTGRES_DB,
     };
   }
 }
