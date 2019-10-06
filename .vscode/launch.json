@@ -5,11 +5,10 @@
       "type": "node",
       "request": "launch",
       "name": "Launch via Yarn",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "start:dev",
-      ],
-      "port": 9229
+      "outputCapture": "console",
+      "port": 9229,
+      "runtimeExecutable": "nest",
+      "runtimeArgs": ["start", "--debug", "--watch"]
     },
     {
       "type": "cloudcode",
@@ -32,7 +31,7 @@
       "protocol": "auto",
       "name": "Launch App on Kubernetes Cluster: NodeJS",
       "podSelector": {
-        "app": "nestjs-app",
+        "app": "nestjs-app"
       }
     }
   ],
