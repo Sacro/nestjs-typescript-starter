@@ -11,10 +11,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       ...this.config.postgres,
-      entities: this.config.isProdEnvironment
+      entities: this.config.isProductionEnvironment
         ? ['dist/**/**.entity{.ts,.js}']
         : ['src/**/**.entity{.ts,.js}'],
-      logging: this.config.isDevEnvironment ? 'all' : ['error'],
+      logging: this.config.isDevelopmentEnvironment ? 'all' : ['error'],
       logger: new TypeormLoggerService(),
       maxQueryExecutionTime: 1000,
       synchronize: false,

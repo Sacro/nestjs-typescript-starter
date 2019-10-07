@@ -27,7 +27,7 @@ describe('TypeormConfigService', () => {
 
   it('should return a dev config object', () => {
     jest
-      .spyOn(config, 'isDevEnvironment', 'get')
+      .spyOn(config, 'isDevelopmentEnvironment', 'get')
       .mockImplementation(() => true);
     const options = service.createTypeOrmOptions();
 
@@ -44,7 +44,7 @@ describe('TypeormConfigService', () => {
 
   it('should return a production config object', () => {
     jest
-      .spyOn(config, 'isProdEnvironment', 'get')
+      .spyOn(config, 'isProductionEnvironment', 'get')
       .mockImplementation(() => true);
 
     const options = service.createTypeOrmOptions();
