@@ -1,23 +1,43 @@
-FROM node:10 as prebuild
-USER node
-RUN mkdir -p /home/node/app/node_modules
-WORKDIR /home/node/app
-COPY --chown=node package.json yarn.lock ./
-RUN yarn install
-COPY --chown=node . ./
+# https://github.com/BretFisher/dockercon19
+
+FROM node:12-slim as base
+ENV NODE=ENV=production
+ENV TINI_VERSION v0.18.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
 EXPOSE 3000
-CMD ["yarn", "run", "start:dev"]
-
-FROM prebuild as build
+RUN mkdir /app && chown -R node:node /app
+WORKDIR /app
 USER node
-WORKDIR /home/node/app
-RUN npm run prestart:prod && yarn install --prod
+COPY --chown=node:node package.json yarn.lock ./
+RUN yarn install --production && yarn cache clean
 
-FROM node:10-alpine as deploy
-USER node
-RUN mkdir -p /home/node/app/node_modules
-WORKDIR /home/node/app
-COPY --from=build --chown=node /home/node/app/package.json ./
-COPY --from=build --chown=node /home/node/app/node_modules ./node_modules
-COPY --from=build --chown=node /home/node/app/dist ./dist
-CMD ["node", "dist/main.js"]
+FROM base as dev
+ENV NODE_ENV=development
+ENV PATH=/app/node_modules/.bin:$PATH
+RUN yarn install
+CMD ["nest", "start", "--debug", "--watch"
+
+FROM base as source
+COPY --chown=node:node . .
+RUN yarn build
+
+FROM source as test
+ENV NODE_ENV=development
+ENV PATH=/app/node_modules/.bin:$PATH
+COPY --from=dev /app/node_modules /app/node_modules
+RUN yarn lint
+RUN yarn test
+CMD ["yarn", "test"]
+
+FROM test as audit
+USER root
+RUN yarn audit --level critical
+ARG MICROSCANNER_TOKEN
+ADD https://get.aquasec.com/microscanner /
+RUN chmod +x /microscanner
+RUN /microscanner $MICROSCANNER_TOKEN --continue-on-failure
+
+FROM source as prod
+ENTRYPOINT ["/tini", "--"]
+CMD ["node", "./dist/main.js"]y
