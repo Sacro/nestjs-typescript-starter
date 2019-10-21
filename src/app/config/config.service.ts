@@ -31,7 +31,7 @@ export class ConfigService {
    * Ensures all needed variables are set, and returns the validated JavaScript object
    * including the applied default values.
    */
-  private validateInput(environmentConfig): EnvConfig {
+  private validateInput(environmentConfig: EnvConfig): EnvConfig {
     const environmentVarsSchema = Joi.object({
       NODE_ENV: Joi.string()
         .valid('development', 'production', 'test', 'provision')
