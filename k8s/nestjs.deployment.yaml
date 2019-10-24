@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nestjs-app
-          image: localhost:32000/nestjs
+          image: localhost:5000/nestjs
           ports:
             - containerPort: 3000
           resources:

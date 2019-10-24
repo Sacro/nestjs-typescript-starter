@@ -4,10 +4,10 @@ apiVersion: skaffold/v1beta13
 kind: Config
 build:
   artifacts:
-    - image: localhost:32000/nestjs
+    - image: localhost:5000/nestjs
       context: .
       docker:
-        target: prebuild
+        target: dev
       sync:
         manual:
           # Sync all the typescript files that are in the src folder
