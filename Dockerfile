@@ -16,7 +16,7 @@ FROM base as dev
 ENV NODE_ENV=development
 ENV PATH=/app/node_modules/.bin:$PATH
 RUN yarn install
-CMD ["nest", "start", "--debug", "--watch"
+CMD ["nest", "start", "--debug", "--watch"]
 
 FROM base as source
 COPY --chown=node:node . .
@@ -40,4 +40,4 @@ RUN /microscanner $MICROSCANNER_TOKEN --continue-on-failure
 
 FROM source as prod
 ENTRYPOINT ["/tini", "--"]
-CMD ["node", "./dist/main.js"]y
+CMD ["node", "./dist/main.js"]

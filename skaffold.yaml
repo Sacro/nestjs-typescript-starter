@@ -1,10 +1,10 @@
 ---
 
-apiVersion: skaffold/v1beta13
+apiVersion: skaffold/v1beta16
 kind: Config
 build:
   artifacts:
-    - image: localhost:5000/nestjs
+    - image: registry.local:5000/nestjs
       context: .
       docker:
         target: dev
