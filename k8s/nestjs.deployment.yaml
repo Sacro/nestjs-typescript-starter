@@ -17,6 +17,11 @@ spec:
       containers:
         - name: nestjs-app
           image: registry.local:5000/nestjs
+          command:
+            - "nest"
+          args:
+            - "start"
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:

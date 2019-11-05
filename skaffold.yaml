@@ -7,10 +7,15 @@ build:
     - image: registry.local:5000/nestjs
       context: .
       docker:
+        cacheFrom:
+          - node:12-slim
         target: dev
       sync:
         manual:
-          # Sync all the typescript files that are in the src folder
-          # with the container src folder
-          - src: 'src/**/*.ts'
-            dest: '.'
+          - src: '*.json'
+            dest: '/app'
+
+          - src: 'src/**/**'
+            dest: '/app'
+  tagPolicy:
+    gitCommit:

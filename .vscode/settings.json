@@ -1,6 +1,6 @@
 {
   "cloudcode.profile-cluster-map": {
-    "[default]": "microk8s"
+    "[default]": "k3d"
   },
   "cloudcode.profile-registry-map": {
     "[default]": "localhost:32000/nestjs"

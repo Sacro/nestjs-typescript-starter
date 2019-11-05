@@ -5,18 +5,21 @@ ENV NODE=ENV=production
 ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
+RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 EXPOSE 3000
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --production && yarn cache clean
+CMD ["echo", "base"]
 
 FROM base as dev
 ENV NODE_ENV=development
 ENV PATH=/app/node_modules/.bin:$PATH
-RUN yarn install
-CMD ["nest", "start", "--debug", "--watch"]
+RUN yarn install && yarn cache clean
+COPY --chown=node:node . .
+CMD ["nest", "start", "--watch"]
 
 FROM base as source
 COPY --chown=node:node . .

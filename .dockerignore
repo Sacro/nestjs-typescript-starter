@@ -135,3 +135,12 @@ typings/
 .history
 
 # End of https://www.gitignore.io/api/angular,node,visualstudiocode
+
+# dockerignore
+
+.gitignore
+.dockerignore
+Dockerfile
+skaffold.json
+k8s/
+.vscode/
