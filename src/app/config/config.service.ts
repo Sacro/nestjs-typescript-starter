@@ -1,8 +1,11 @@
+/* eslint-disable import/named */
+/* eslint-disable import/namespace */
+
+import * as Joi from '@hapi/joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as Joi from '@hapi/joi';
-import { sync as username } from 'username'; // eslint-disable-line import/named
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { sync as username } from 'username';
 
 export interface EnvConfig {
   [key: string]: string;

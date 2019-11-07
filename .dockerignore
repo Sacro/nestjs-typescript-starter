@@ -135,3 +135,21 @@ typings/
 .history
 
 # End of https://www.gitignore.io/api/angular,node,visualstudiocode
+
+.stryker-tmp
+reports/
+
+
+# dockerignore - content above this line is automatically generated and modifications may be omitted
+# see npmjs.com/dockerignore for more details.
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.gitignore
+README.md
+LICENCE
+.vscode/
+k8s/
+skaffold.json
+Tiltfile
