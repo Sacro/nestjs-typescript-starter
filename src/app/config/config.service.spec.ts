@@ -3,7 +3,7 @@ import 'jest-extended';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as fs from 'fs';
 
-import { ConfigService, EnvConfig } from './config.service';
+import { ConfigService, EnvironmentConfig } from './config.service';
 
 describe('ConfigService', () => {
   let service: ConfigService;
@@ -20,7 +20,7 @@ describe('ConfigService', () => {
   });
 
   it('should fail with an invalid config', async () => {
-    const invalidEnvironment: EnvConfig = { NODE_ENV: 'invalid' };
+    const invalidEnvironment: EnvironmentConfig = { NODE_ENV: 'invalid' };
     expect(() =>
       (service as any).validateInput(invalidEnvironment),
     ).toThrowWithMessage(Error, /^Config validation error:/);

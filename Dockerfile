@@ -12,6 +12,7 @@ WORKDIR /app
 USER node
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --production && yarn cache clean
+CMD ["echo", "base"]
 
 FROM base as dev
 ENV NODE_ENV=development

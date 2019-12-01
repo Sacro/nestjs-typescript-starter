@@ -1,25 +1,23 @@
-/* eslint-disable import/named */
-/* eslint-disable import/namespace */
-
 import * as Joi from '@hapi/joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+// eslint-disable-next-line import/named
 import { sync as username } from 'username';
 
-export interface EnvConfig {
+export interface EnvironmentConfig {
   [key: string]: string;
 }
 
 export class ConfigService {
-  private readonly environmentConfig: EnvConfig;
+  private readonly environmentConfig: EnvironmentConfig;
 
   public constructor(filePath: string) {
-    const config: EnvConfig = this.readEnvironmentFromFile(filePath);
+    const config: EnvironmentConfig = this.readEnvironmentFromFile(filePath);
     this.environmentConfig = this.validateInput(config);
   }
 
-  private readEnvironmentFromFile(filePath: string): EnvConfig {
+  private readEnvironmentFromFile(filePath: string): EnvironmentConfig {
     if (fs.existsSync(filePath)) {
       return Object.assign(
         dotenv.parse(fs.readFileSync(filePath)),
@@ -34,7 +32,9 @@ export class ConfigService {
    * Ensures all needed variables are set, and returns the validated JavaScript object
    * including the applied default values.
    */
-  private validateInput(environmentConfig: EnvConfig): EnvConfig {
+  private validateInput(
+    environmentConfig: EnvironmentConfig,
+  ): EnvironmentConfig {
     const environmentVarsSchema = Joi.object({
       NODE_ENV: Joi.string()
         .valid('development', 'production', 'test', 'provision')

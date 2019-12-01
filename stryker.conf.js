@@ -5,19 +5,12 @@ module.exports = function(config) {
   config.set({
     mutator: 'typescript',
     packageManager: 'yarn',
-    reporters: ['clear-text', 'progress', 'html'],
+    reporters: ['clear-text', 'progress'],
     testRunner: 'jest',
+    transpilers: ['typescript'],
     coverageAnalysis: 'off',
     tsconfigFile: 'tsconfig.json',
-    files: ['src/**/*.ts', '!src/**/index.ts', 'test/**/*.ts'],
-    mutate: [
-      '{src,lib}/**/*.ts?(x)',
-      '!{src,lib}/**/__tests__/**/*.ts?(x)',
-      '!{src,lib}/**/?(*.)+(spec|test).ts?(x)',
-      '!{src,lib}/**/*+(Spec|Test).ts?(x)',
-    ],
-    jest: {
-      config: require('./package.json').jest,
-    },
+    files: ['src/**/**.spec.ts'],
+    mutate: ['src/**/**.spec.ts'],
   });
 };
