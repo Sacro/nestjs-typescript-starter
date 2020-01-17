@@ -8,8 +8,8 @@ docker_build(
     run('cd /app && yarn install', trigger='yarn.lock'),
     restart_container()
   ],
-  target='dev'
+  target='dev-source'
 )
 
-allow_k8s_contexts('k3d')
+allow_k8s_contexts('k3s-k3d')
 k8s_yaml(['k8s/nestjs.deployment.yaml', 'k8s/nestjs.service.yaml'])
