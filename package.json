@@ -21,7 +21,6 @@
     "test:mutate": "stryker run"
   },
   "dependencies": {
-    "@godaddy/terminus": "^4.3.1",
     "@hapi/joi": "^17.1.0",
     "@nestjs/common": "^7.0.1",
     "@nestjs/core": "^7.0.1",
