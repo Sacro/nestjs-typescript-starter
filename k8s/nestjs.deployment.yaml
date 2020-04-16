@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nestjs-app
-          image: registry.local:5000/nestjs
+          image: nestjs
           command:
             - "nest"
             - "start"

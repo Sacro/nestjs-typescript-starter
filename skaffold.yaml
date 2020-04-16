@@ -4,7 +4,7 @@ apiVersion: skaffold/v1
 kind: Config
 build:
   artifacts:
-    - image: registry.local:5000/nestjs
+    - image: nestjs
       context: .
       docker:
         cacheFrom:
@@ -17,5 +17,5 @@ build:
 
           - src: 'src/**/**'
             dest: '/app'
-  tagPolicy:
-    gitCommit:
+  local:
+    useBuildkit: true
