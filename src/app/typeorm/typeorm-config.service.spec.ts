@@ -1,8 +1,6 @@
-import 'jest-extended';
-
+import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-
-import { ConfigService } from '../config/config.service';
+import 'jest-extended';
 import { TypeOrmConfigService } from './typeorm-config.service';
 
 describe('TypeormConfigService', () => {
@@ -26,9 +24,7 @@ describe('TypeormConfigService', () => {
   });
 
   it('should return a dev config object', () => {
-    jest
-      .spyOn(config, 'isDevelopmentEnvironment', 'get')
-      .mockImplementation(() => true);
+    jest.spyOn(config, 'get').mockImplementation(() => 'development');
     const options = service.createTypeOrmOptions();
 
     expect(options.logging).toBe('all');
@@ -36,6 +32,7 @@ describe('TypeormConfigService', () => {
   });
 
   it('should return a test config object', () => {
+    jest.spyOn(config, 'get').mockImplementation(() => 'testing');
     const options = service.createTypeOrmOptions();
 
     expect(options.logging).toEqual(['error']);
@@ -43,9 +40,7 @@ describe('TypeormConfigService', () => {
   });
 
   it('should return a production config object', () => {
-    jest
-      .spyOn(config, 'isProductionEnvironment', 'get')
-      .mockImplementation(() => true);
+    jest.spyOn(config, 'get').mockImplementation(() => 'production');
 
     const options = service.createTypeOrmOptions();
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-
-import { ConfigService } from '../config/config.service';
 import { TypeormLoggerService } from './typeorm-logger.service';
 
 @Injectable()
@@ -10,11 +9,12 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      ...this.config.postgres,
-      entities: this.config.isProductionEnvironment
-        ? ['dist/**/**.entity{.ts,.js}']
-        : ['src/**/**.entity{.ts,.js}'],
-      logging: this.config.isDevelopmentEnvironment ? 'all' : ['error'],
+      entities:
+        this.config.get('NODE_ENV') === 'production'
+          ? ['dist/**/**.entity{.ts,.js}']
+          : ['src/**/**.entity{.ts,.js}'],
+      logging:
+        this.config.get('NODE_ENV') === 'development' ? 'all' : ['error'],
       logger: new TypeormLoggerService(),
       maxQueryExecutionTime: 1000,
       synchronize: false,
