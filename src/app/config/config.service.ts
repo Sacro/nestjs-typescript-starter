@@ -2,7 +2,6 @@ import * as Joi from '@hapi/joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-// eslint-disable-next-line import/named
 import { sync as username } from 'username';
 
 export interface EnvironmentConfig {
