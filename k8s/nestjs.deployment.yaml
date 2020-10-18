@@ -21,7 +21,6 @@ spec:
             - "nest"
             - "start"
             - "--watch"
-          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:
