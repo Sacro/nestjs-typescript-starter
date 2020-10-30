@@ -1,5 +1,4 @@
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,16 +16,12 @@ spec:
       containers:
         - name: nestjs-app
           image: nestjs
-          command:
-            - "nest"
-            - "start"
-            - "--watch"
           ports:
             - containerPort: 3000
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "250m"
+              memory: '64Mi'
+              cpu: '250m'
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: '512Mi'
+              cpu: '500m'

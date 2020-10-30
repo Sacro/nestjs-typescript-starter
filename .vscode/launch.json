@@ -11,28 +11,45 @@
       "runtimeArgs": ["start:debug"]
     },
     {
-      "type": "cloudcode",
-      "language": "Node",
-      "request": "attach",
-      "debugPort": 9229,
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/home/node/app",
-      "name": "Attach App on Kubernetes Cluster: NodeJS",
-      "podSelector": {
-        "app": "nestjs-app"
-      }
+      "name": "Kubernetes: Run",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "profile": "dev",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "imageRegistry": "registry.localhost:5000"
     },
     {
-      "type": "cloudcode",
-      "language": "Node",
+      "name": "Kubernetes: Debug",
+      "type": "cloudcode.kubernetes",
       "request": "launch",
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/home/node/app",
-      "protocol": "auto",
-      "name": "Launch App on Kubernetes Cluster: NodeJS",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": false,
+      "cleanUp": true,
+      "portForward": true,
+      "imageRegistry": "registry.localhost:5000",
+      "debug": [
+        {
+          "image": "nestjs",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/app"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attach to Kubernetes Pod (NodeJS)",
+      "type": "cloudcode.kubernetes",
+      "request": "attach",
+      "language": "Node",
+      "debugPort": 9229,
       "podSelector": {
         "app": "nestjs-app"
-      }
+      },
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app"
     }
   ],
   "compounds": []
