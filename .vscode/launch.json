@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch via Yarn",
+      "name": "Yarn: Debug",
       "outputCapture": "std",
       "port": 9229,
       "runtimeExecutable": "yarn",
@@ -26,6 +26,25 @@
       "type": "cloudcode.kubernetes",
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": false,
+      "cleanUp": true,
+      "portForward": true,
+      "imageRegistry": "registry.localhost:5000",
+      "debug": [
+        {
+          "image": "nestjs",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/app"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kubernetes: Debug Break",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "profile": "debug-brk",
       "watch": false,
       "cleanUp": true,
       "portForward": true,

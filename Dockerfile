@@ -13,6 +13,8 @@ USER node
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --production && yarn cache clean
 
+# Development
+
 FROM base as dev
 ENV NODE_ENV=development
 ENV PATH=/app/node_modules/.bin:$PATH
@@ -23,19 +25,18 @@ FROM dev as dev-source
 COPY --chown=node:node . .
 
 FROM dev-source as debug-source
-CMD [ "nest", "start", "--debug" ]
+CMD [ "nest", "start", "--debug"]
 
-FROM base as source
-COPY --chown=node:node . .
-RUN yarn build
+# Debugging
 
-FROM source as test
-ENV NODE_ENV=development
-ENV PATH=/app/node_modules/.bin:$PATH
-COPY --from=dev /app/node_modules /app/node_modules
+FROM debug-source as debug-source-brk
+ENV DEBUG_BRK=true
+
+# Testing
+
+FROM dev-source as test
 RUN yarn lint
 RUN yarn test
-CMD ["yarn", "test"]
 
 FROM test as audit
 USER root
@@ -44,6 +45,12 @@ ARG MICROSCANNER_TOKEN
 ADD https://get.aquasec.com/microscanner /
 RUN chmod +x /microscanner
 RUN /microscanner $MICROSCANNER_TOKEN --continue-on-failure
+
+# Build
+
+FROM base as source
+COPY --chown=node:node . .
+RUN yarn build
 
 FROM source as prod
 ENTRYPOINT ["/tini", "--"]

@@ -27,3 +27,17 @@ profiles:
       - op: replace
         path: /build/artifacts/0/docker/target
         value: debug-source
+
+  - name: debug-brk
+    activation:
+      - command: debug-brk
+    patches:
+      - op: replace
+        path: /build/artifacts/0/docker/target
+        value: debug-source-brk
+
+  - name: test
+    patches:
+      - op: replace
+        path: /build/artifacts/0/docker/target
+        value: test
