@@ -12,7 +12,6 @@ WORKDIR /app
 USER node
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --production && yarn cache clean
-CMD ["echo", "base"]
 
 FROM base as dev
 ENV NODE_ENV=development
@@ -22,6 +21,9 @@ CMD ["nest", "start", "--watch"]
 
 FROM dev as dev-source
 COPY --chown=node:node . .
+
+FROM dev-source as debug-source
+CMD [ "nest", "start", "--debug" ]
 
 FROM base as source
 COPY --chown=node:node . .
