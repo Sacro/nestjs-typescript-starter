@@ -1,8 +1,8 @@
 # https://github.com/BretFisher/dockercon19
 
-FROM node:12-slim as base
+FROM node:14 as base
 ENV NODE=ENV=production
-ENV TINI_VERSION v0.18.0
+ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
