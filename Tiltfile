@@ -1,6 +1,6 @@
-default_registry('registry.local:5000')
+default_registry('registry.localhost:5000')
 docker_build(
-  'registry.local:5000/nestjs',
+  'registry.localhost:5000/nestjs',
   '.',
   live_update=[
     fall_back_on(['package.json', 'yarn.lock']),
@@ -11,5 +11,5 @@ docker_build(
   target='dev-source'
 )
 
-allow_k8s_contexts('k3s-k3d')
+allow_k8s_contexts('k3d-k3s-default')
 k8s_yaml(['k8s/nestjs.deployment.yaml', 'k8s/nestjs.service.yaml'])
