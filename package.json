@@ -21,21 +21,21 @@
     "test:mutate": "stryker run"
   },
   "dependencies": {
+    "@mikro-orm/core": "^4.2.3",
+    "@mikro-orm/nestjs": "^4.2.0",
+    "@mikro-orm/postgresql": "^4.2.3",
     "@nestjs/common": "^7.4.4",
     "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.4.4",
     "@nestjs/microservices": "^7.4.4",
     "@nestjs/platform-express": "^7.4.4",
     "@nestjs/terminus": "^7.0.1",
-    "@nestjs/typeorm": "^7.1.4",
     "@nestjs/websockets": "^7.4.4",
     "dotenv": "8.2.0",
     "joi": "^17.3.0",
-    "pg": "8.4.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "typeorm": "0.2.28",
     "username": "5.1.0"
   },
   "devDependencies": {

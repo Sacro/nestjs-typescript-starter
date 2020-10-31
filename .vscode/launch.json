@@ -8,7 +8,9 @@
       "outputCapture": "std",
       "port": 9229,
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["start:debug"]
+      "runtimeArgs": [
+        "start:debug"
+      ]
     },
     {
       "name": "Kubernetes: Run",
@@ -27,7 +29,7 @@
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
       "watch": false,
-      "cleanUp": true,
+      "cleanUp": false,
       "portForward": true,
       "imageRegistry": "registry.localhost:5000",
       "debug": [
