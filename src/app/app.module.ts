@@ -1,14 +1,9 @@
 import { Logger } from '@mikro-orm/core';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
-import {
-  MikroOrmConfigService,
-  MikroOrmLocalStorage,
-  MikroOrmMiddleware,
-} from './mikro-orm-config';
+import { MikroOrmConfigModule } from './mikro-orm-config/mikro-orm-config.module';
 
 @Module({
   imports: [
@@ -23,17 +18,10 @@ import {
       //   stripUnknown: true,
       // }),
     }),
-    MikroOrmModule.forRootAsync({
-      providers: [MikroOrmLocalStorage],
-      useClass: MikroOrmConfigService,
-    }),
+    MikroOrmConfigModule,
     TerminusModule,
   ],
   controllers: [HealthController],
-  providers: [Logger, MikroOrmLocalStorage],
+  providers: [Logger],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(MikroOrmMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
