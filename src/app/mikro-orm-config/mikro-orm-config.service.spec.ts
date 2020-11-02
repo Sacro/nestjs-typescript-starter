@@ -1,12 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MikroOrmConfigService } from './mikro-orm-config.service';
+import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
 
 describe('MikroOrmConfigService', () => {
   let service: MikroOrmConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MikroOrmConfigService],
+      providers: [
+        MikroOrmConfigService,
+        {
+          provide: MikroOrmLocalStorage,
+          useValue: () => ({}),
+        },
+        {
+          provide: MikroOrmConfigService,
+          useValue: () => ({}),
+        },
+      ],
     }).compile();
 
     service = module.get<MikroOrmConfigService>(MikroOrmConfigService);
