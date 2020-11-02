@@ -3,22 +3,28 @@ import {
   MikroOrmModuleOptions,
   MikroOrmOptionsFactory,
 } from '@mikro-orm/nestjs';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ConfigType } from '@nestjs/config';
 import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
+import config from './mikro-orm.config';
 
 @Injectable()
 export class MikroOrmConfigService implements MikroOrmOptionsFactory {
-  public constructor(private readonly localStorage: MikroOrmLocalStorage) {}
+  public constructor(
+    @Inject(config.KEY)
+    private dbConfig: ConfigType<typeof config>,
+    private localStorage: MikroOrmLocalStorage,
+  ) {}
 
   createMikroOrmOptions(): MikroOrmModuleOptions<IDatabaseDriver<Connection>> {
     return {
-      type: 'postgresql',
+      logger: Logger.log,
+      autoLoadEntities: true,
       entities: ['./dist/entities'],
       entitiesTs: ['./src/entities'],
-      clientUrl: 'postgresql://postgres:sHWSphW9M@postgres-postgresql',
-      autoLoadEntities: true,
       registerRequestContext: false,
       context: () => this.localStorage.storage.getStore(),
+      ...this.dbConfig,
     };
   }
 }
