@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-module.exports = function() {
+module.exports = function () {
   return {
     env: {
       runner: 'node',
@@ -17,7 +17,8 @@ module.exports = function() {
       { pattern: 'src/**/*.spec.ts', ignore: true },
     ],
     reportConsoleErrorAsError: true,
-    setup: function(wallaby) {
+    setup: function (wallaby) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       var jestConfig = require('./package.json').jest;
       // for example:
       // jestConfig.globals = { "__DEV__": true };

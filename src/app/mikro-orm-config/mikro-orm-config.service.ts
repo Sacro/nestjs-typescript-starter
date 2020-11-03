@@ -12,7 +12,7 @@ import config from './mikro-orm.config';
 export class MikroOrmConfigService implements MikroOrmOptionsFactory {
   public constructor(
     @Inject(config.KEY)
-    private dbConfig: ConfigType<typeof config>,
+    private databaseConfig: ConfigType<typeof config>,
     private localStorage: MikroOrmLocalStorage,
   ) {}
 
@@ -24,7 +24,7 @@ export class MikroOrmConfigService implements MikroOrmOptionsFactory {
       entitiesTs: ['./src/entities'],
       registerRequestContext: false,
       context: () => this.localStorage.storage.getStore(),
-      ...this.dbConfig,
+      ...this.databaseConfig,
     };
   }
 }
