@@ -99,7 +99,6 @@
   "lint-staged": {
     "*.{js,json,jsx,ts,tsx}": [
       "eslint --cache --fix",
-      "git add",
       "jest --bail --findRelatedTests"
     ]
   }
