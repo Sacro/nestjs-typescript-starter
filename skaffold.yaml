@@ -1,25 +1,32 @@
----
-apiVersion: skaffold/v1
+apiVersion: skaffold/v2beta9
 kind: Config
+
 build:
   artifacts:
     - image: nestjs
       context: .
-      docker:
-        cacheFrom:
-          - node:14-slim
-        target: dev-source
       sync:
         manual:
-          - src: '*.json'
-            dest: '/app'
+          - src: src/**
+            dest: /app
+      docker:
+        target: prod
+        cacheFrom:
+          - node:14
+          - gcr.io/distroless/nodejs:14
 
-          - src: 'src/**/**'
-            dest: '/app'
   local:
     useBuildkit: true
 
 profiles:
+  - name: dev
+    activation:
+      - command: dev
+    patches:
+      - op: replace
+        path: /build/artifacts/0/docker/target
+        value: dev-source
+
   - name: debug
     activation:
       - command: debug

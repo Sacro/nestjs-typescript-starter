@@ -8,28 +8,27 @@
       "outputCapture": "std",
       "port": 9229,
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "start:debug"
-      ]
+      "runtimeArgs": ["start:debug"]
     },
-    {
-      "name": "Kubernetes: Run",
-      "type": "cloudcode.kubernetes",
-      "request": "launch",
-      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-      "profile": "dev",
-      "watch": true,
-      "cleanUp": true,
-      "portForward": true,
-      "imageRegistry": "registry.localhost:5000"
-    },
+    // {
+    //   "name": "Kubernetes: Dev",
+    //   "type": "cloudcode.kubernetes",
+    //   "request": "launch",
+    //   "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+    //   "profile": "dev",
+    //   "watch": true,
+    //   "cleanUp": true,
+    //   "portForward": true,
+    //   "imageRegistry": "registry.localhost:5000"
+    // },
     {
       "name": "Kubernetes: Debug",
       "type": "cloudcode.kubernetes",
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "profile": "debug",
       "watch": false,
-      "cleanUp": false,
+      "cleanUp": true,
       "portForward": true,
       "imageRegistry": "registry.localhost:5000",
       "debug": [

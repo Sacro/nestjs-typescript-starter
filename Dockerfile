@@ -20,7 +20,7 @@ FROM dev as dev-source
 COPY --chown=node:node . .
 
 FROM dev-source as debug-source
-CMD [ "nest", "start", "--debug"]
+CMD [ "nest", "start", "--debug", "--watch"]
 
 # Debugging
 
@@ -43,10 +43,15 @@ RUN /microscanner $MICROSCANNER_TOKEN --continue-on-failure
 
 # Build
 
-FROM dev-source as source
+FROM dev-source as build
 RUN yarn build
-RUN yarn install --frozen-lockfile --production && yarn cache clear
+RUN yarn install --frozen-lockfile --production && yarn cache clean
 
-FROM source as prod
-ENTRYPOINT ["/tini", "--"]
-CMD ["node", "./dist/main.js"]
+# Prod
+
+FROM gcr.io/distroless/nodejs:14 as prod
+COPY --from=build /app/node_modules/ /app/node_modules
+COPY --from=build /app/dist/ /app/dist
+USER nonroot
+WORKDIR /app
+CMD ["./dist/main.js"]
