@@ -11,7 +11,6 @@ module.exports = {
     'plugin:jest/recommended',
     'plugin:jest/style',
     'plugin:json/recommended',
-    'plugin:sonarjs/recommended',
     'plugin:unicorn/recommended',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
