@@ -3,7 +3,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'jest', 'json', 'sonarjs'],
+  plugins: [],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -13,9 +13,9 @@ module.exports = {
     'plugin:json/recommended',
     'plugin:sonarjs/recommended',
     'plugin:unicorn/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'prettier/unicorn',
   ],
   root: true,
   env: {
