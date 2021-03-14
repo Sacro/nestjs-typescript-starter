@@ -5,7 +5,6 @@ import {
 } from '@mikro-orm/nestjs';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import { inspect } from 'util';
 import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
 import { MikroOrmConfig } from './mikro-orm.config';
 
@@ -21,23 +20,7 @@ export class MikroOrmConfigService implements MikroOrmOptionsFactory {
     return {
       logger: Logger.log,
       context: () => this.localStorage.storage.getStore(),
-      debug: process.env.NODE_ENV === 'development',
-      entities: ['./dist/entities'],
-      entitiesTs: ['./src/entities'],
-      findOneOrFailHandler: (
-        entityName: string,
-        where: Dictionary | IPrimaryKey,
-      ): Error => {
-        return new NotFoundException(
-          `Failed: ${entityName} in ${inspect(where)}`,
-        );
-      },
-      logger: (message: unknown) => Logger.debug(message),
-      metadataProvider: TsMorphMetadataProvider,
-      migrations: {
-        path: 'migrations',
-      },
-      registerRequestContext: false,
+      ...this.databaseConfig,
     };
   }
 }

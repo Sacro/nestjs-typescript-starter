@@ -3,13 +3,13 @@ import { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { registerAs } from '@nestjs/config';
-import * as util from 'util';
+import { inspect } from 'util';
 
 export const MikroOrmBaseConfig = (): MikroOrmModuleOptions => {
   return {
     type: 'postgresql' as const,
     host: process.env.POSTGRES_HOST || 'localhost',
-    port: parseInt(process.env.POSTGRES_PORT, 10) || 5432,
+    port: Number.parseInt(process.env.POSTGRES_PORT, 10) || 5432,
     dbName: process.env.POSTGRES_DB || 'postgres',
     user: process.env.POSTGRES_USER || 'postgres',
     password: process.env.POSTGRES_PASSWORD || 'postgres',
@@ -27,7 +27,7 @@ export const MikroOrmBaseConfig = (): MikroOrmModuleOptions => {
       where: Dictionary | IPrimaryKey,
     ): Error => {
       return new NotFoundException(
-        `Failed: ${entityName} in ${util.inspect(where)}`,
+        `Failed: ${entityName} in ${inspect(where)}`,
       );
     },
     logger: (message: unknown) => Logger.debug(message),
