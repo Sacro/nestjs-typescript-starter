@@ -4,12 +4,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
 import { HealthModule } from './health/health.module';
-import { MikroOrmModule } from './mikro-orm';
+import { MikroOrmConfig, MikroOrmModule } from './mikro-orm';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
+      load: [MikroOrmConfig],
     }),
     MikroOrmModule,
     HealthModule,
