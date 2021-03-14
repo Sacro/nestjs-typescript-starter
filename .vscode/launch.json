@@ -10,6 +10,12 @@
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["start:debug"]
     },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Docker: Attach to Node",
+      "remoteRoot": "/app"
+    },
     // {
     //   "name": "Kubernetes: Dev",
     //   "type": "cloudcode.kubernetes",

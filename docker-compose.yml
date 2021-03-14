@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-      target: dev
+      target: debug
     volumes:
       - .:/app:delegated
     ports:
