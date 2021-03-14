@@ -1,0 +1,29 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.163.1/containers/docker-existing-dockerfile
+{
+  // Update the 'dockerComposeFile' property if you aren't using the standard 'docker-compose.yml' filename.
+  "dockerComposeFile": "../docker-compose.yml",
+
+  // Set service target to connect to by default.
+  "service": "node",
+
+  "remoteEnv": {
+    "POSTGRES_DATABASE": "db",
+    "POSTGRES_PORT": "5432",
+    "POSTGRES_USER": "postgres",
+    "POSTGRES_PASSWORD": "postgres"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the containers available locally.
+  "forwardPorts": [3000],
+
+  // Set the workspace folder to open when connecting.
+  "workspaceFolder": "/app"
+}
