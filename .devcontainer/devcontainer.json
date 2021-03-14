@@ -7,13 +7,6 @@
   // Set service target to connect to by default.
   "service": "node",
 
-  "remoteEnv": {
-    "POSTGRES_DATABASE": "db",
-    "POSTGRES_PORT": "5432",
-    "POSTGRES_USER": "postgres",
-    "POSTGRES_PASSWORD": "postgres"
-  },
-
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "dbaeumer.vscode-eslint",

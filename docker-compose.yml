@@ -1,5 +1,12 @@
 version: '2.4'
 
+x-environment: &environment
+  environment:
+    POSTGRES_DB: postgres
+    POSTGRES_HOST: db
+    POSTGRES_PASSWORD: password
+    POSTGRES_USER: postgres
+
 services:
   node:
     build:
@@ -10,14 +17,15 @@ services:
       - .:/app:delegated
     ports:
       - "3000:3000"
+    <<: *environment
     depends_on:
       db:
         condition: service_healthy
 
   db:
     image: postgres
-    environment:
-      POSTGRES_PASSWORD: password
+    <<: *environment
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
+
