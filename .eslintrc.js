@@ -13,8 +13,6 @@ module.exports = {
     'plugin:json/recommended',
     'plugin:unicorn/recommended',
     'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
-    'prettier/unicorn',
   ],
   root: true,
   env: {
