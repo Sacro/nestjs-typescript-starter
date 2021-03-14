@@ -1,17 +1,21 @@
 # https://github.com/BretFisher/dockercon19
 
 FROM node:14 as base
-# RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
+ENV NODE_ENV=production
+ENV TINI_VERSION v0.18.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+EXPOSE 3000
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
-EXPOSE 3000
+COPY --chown=node:node package.json yarn.lock ./
+RUN yarn install --frozen-lockfile && yarn cache clean
 
 # Development
 
 FROM base as dev
 ENV NODE_ENV=development
-COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --frozen-lockfile && yarn cache clean
 ENV PATH=/app/node_modules/.bin:$PATH
 CMD ["nest", "start", "--watch"]
