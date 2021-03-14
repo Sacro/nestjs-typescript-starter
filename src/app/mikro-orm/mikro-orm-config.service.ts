@@ -11,7 +11,7 @@ import {
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import { inspect } from 'util';
+import * as util from 'util';
 import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
 import { MikroOrmConfig } from './mikro-orm.config';
 
@@ -46,7 +46,7 @@ export class MikroOrmConfigService implements MikroOrmOptionsFactory {
         where: Dictionary | IPrimaryKey,
       ): Error => {
         return new NotFoundException(
-          `Failed: ${entityName} in ${inspect(where)}`,
+          `Failed: ${entityName} in ${util.inspect(where)}`,
         );
       },
       logger: (message: unknown) => Logger.debug(message),
@@ -55,7 +55,6 @@ export class MikroOrmConfigService implements MikroOrmOptionsFactory {
         path: 'migrations',
       },
       registerRequestContext: false,
-      tsNode: true,
     };
   }
 }
