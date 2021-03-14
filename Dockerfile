@@ -19,10 +19,14 @@ CMD ["nest", "start", "--watch"]
 FROM dev as dev-source
 COPY --chown=node:node . .
 
+# Debugging
+
+FROM dev as debug
+CMD [ "nest", "start", "--debug", "--watch"]
+
 FROM dev-source as debug-source
 CMD [ "nest", "start", "--debug", "--watch"]
 
-# Debugging
 
 FROM debug-source as debug-source-brk
 ENV DEBUG_BRK=true
