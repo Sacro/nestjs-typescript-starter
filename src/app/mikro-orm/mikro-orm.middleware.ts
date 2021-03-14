@@ -10,7 +10,11 @@ export class MikroOrmMiddleware implements NestMiddleware {
     private readonly localStorage: MikroOrmLocalStorage,
   ) {}
 
-  async use(_req: Request, _res: Response, next: (...args: any[]) => void) {
+  async use(
+    _req: Request,
+    _res: Response,
+    next: (...args: unknown[]) => void,
+  ): Promise<void> {
     this.localStorage.storage.run(this.orm.em.fork(true, true), next);
   }
 }

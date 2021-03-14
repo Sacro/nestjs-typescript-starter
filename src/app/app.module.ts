@@ -1,11 +1,20 @@
 import { Logger } from '@mikro-orm/core';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
-import { MikroOrmConfigModule } from './mikro-orm-config/mikro-orm-config.module';
+import { HealthModule } from './health/health.module';
+import { MikroOrmModule } from './mikro-orm';
 
 @Module({
-  imports: [MikroOrmConfigModule, TerminusModule],
+  imports: [
+    ConfigModule.forRoot({
+      cache: true,
+    }),
+    MikroOrmModule,
+    HealthModule,
+    TerminusModule,
+  ],
   controllers: [HealthController],
   providers: [Logger],
 })
