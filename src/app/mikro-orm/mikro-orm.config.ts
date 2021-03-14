@@ -39,10 +39,4 @@ export const MikroOrmBaseConfig = (): MikroOrmModuleOptions => {
   };
 };
 
-export const MikroOrmEntityConfig = (): MikroOrmModuleOptions => ({
-  ...MikroOrmBaseConfig(),
-  entities: ['./dist/entities/*.entity.js'],
-  entitiesTs: ['./src/entities/*.entity.ts'],
-});
-
 export const MikroOrmConfig = registerAs('mikro-orm', MikroOrmBaseConfig);
