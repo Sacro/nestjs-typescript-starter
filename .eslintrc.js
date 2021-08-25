@@ -29,7 +29,7 @@ module.exports = {
       'error',
       {
         checkFilenames: false,
-        whitelist: {
+        allowList: {
           args: true,
           req: true,
           res: true,

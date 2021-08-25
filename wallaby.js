@@ -1,5 +1,6 @@
 process.env.NODE_ENV = 'test';
 
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = function () {
   return {
     env: {
@@ -18,8 +19,8 @@ module.exports = function () {
     ],
     reportConsoleErrorAsError: true,
     setup: function (wallaby) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      var jestConfig = require('./package.json').jest;
+      // eslint-disable-next-line @typescript-eslint/no-var-requires,unicorn/prefer-module
+      let jestConfig = require('./package.json').jest;
       // for example:
       // jestConfig.globals = { "__DEV__": true };
       wallaby.testFramework.configure(jestConfig);
