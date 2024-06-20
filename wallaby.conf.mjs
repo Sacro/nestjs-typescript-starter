@@ -1,4 +1,5 @@
-module.exports = () => {
+// eslint-disable-next-line unicorn/prevent-abbreviations
+const wallabyConfig = () => {
   return {
     autodetect: true,
 
@@ -43,3 +44,5 @@ module.exports = () => {
     // tests: [{ pattern: 'src/**/*spec.ts' }],
   };
 };
+
+export default wallabyConfig;
