@@ -1,5 +1,4 @@
-import { Logger } from '@mikro-orm/core';
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
@@ -12,7 +11,7 @@ import { MikroOrmConfig, MikroOrmModule } from './mikro-orm';
       cache: true,
       load: [MikroOrmConfig],
     }),
-    MikroOrmModule,
+    // MikroOrmModule,
     HealthModule,
     TerminusModule,
   ],

@@ -11,7 +11,7 @@ export class HealthController {
   constructor(
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
-    private orm: MikroORMHealthIndicator,
+    // private orm: MikroORMHealthIndicator,
   ) {}
 
   @Get()
@@ -19,7 +19,7 @@ export class HealthController {
   healthcheck() {
     return this.health.check([
       async () => this.http.pingCheck('google', 'https://google.com'),
-      async () => this.orm.isHealthy('orm'),
+      // async () => this.orm.isHealthy('orm'),
     ]);
   }
 }

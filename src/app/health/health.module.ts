@@ -4,8 +4,8 @@ import { MikroORMHealthIndicator, MikroOrmModule } from '../mikro-orm';
 import { HealthController } from './health.controller';
 
 @Module({
-  imports: [MikroOrmModule, TerminusModule],
-  providers: [MikroORMHealthIndicator],
+  imports: [/*MikroOrmModule,*/ TerminusModule],
+  // providers: [MikroORMHealthIndicator],
   controllers: [HealthController],
 })
 export class HealthModule {}
