@@ -3,7 +3,7 @@
 import eslint from '@eslint/js';
 import eslintPluginTypescript from 'typescript-eslint';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import eslintPluginJest from 'eslint-plugin-jest';
+import eslintPluginVitest from 'eslint-plugin-vitest';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default eslintPluginTypescript.config(
@@ -23,7 +23,7 @@ export default eslintPluginTypescript.config(
       },
     },
   },
-  eslintPluginJest.configs['flat/recommended'],
+  eslintPluginVitest.configs.recommended,
   // @ts-expect-error
   eslintPluginUnicorn.configs['flat/recommended'],
   eslintPluginPrettierRecommended,
