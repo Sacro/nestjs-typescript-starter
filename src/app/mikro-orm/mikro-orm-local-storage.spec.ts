@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('MikroOrmLocalStorage', () => {
   let provider: MikroOrmLocalStorage;

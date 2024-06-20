@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MikroOrmConfigService } from './mikro-orm-config.service';
 import { MikroOrmLocalStorage } from './mikro-orm-local-storage';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 describe('MikroOrmConfigService', () => {
   let service: MikroOrmConfigService;
