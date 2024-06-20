@@ -139,7 +139,7 @@ importers:
         specifier: ^36.0.0
         version: 36.0.0(eslint@7.32.0)
       husky:
-        specifier: ^7.0.2
+        specifier: ^7.0.4
         version: 7.0.4
       jest:
         specifier: ^27.2.2
