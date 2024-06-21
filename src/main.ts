@@ -14,9 +14,6 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   await app.listen(port, () => {
     Logger.log(`App listening on port ${port}`, 'NestApplication');
-
-
-
   });
 }
 bootstrap();
